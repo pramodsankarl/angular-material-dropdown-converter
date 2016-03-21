@@ -1,4 +1,12 @@
-export {DropdownController} from './dropdown-controller';
+export {
+    DropdownController
+} from './dropdown-controller';
+
+export {
+    IDropDownSettings,
+    IDropDownAttributes,
+    IDropDownViewModel
+};
 
 function DropdownDirective($parse: ng.IParseService):  ng.IDirective{
     //Regex taken from angular
