@@ -144,38 +144,4 @@ function DropdownDirective($parse: ng.IParseService):  ng.IDirective{
     };
 };
 
-function DropdownConverter($compile) {
-   let _parentSelector = ".convertselect",
-       rawTemplate = '<wmt-dropdown placeholder="--Select--" settings=\'{"performant":true}\'></wmt-dropdown>',
-       attrAlias = {
-           'ng-options': 'options',
-           'data-ng-options' : 'options'
-       };
-
-   return {
-       restrict: 'E',
-       link: function (scope:ng.IScope, elm:ng.IAugmentedJQuery ,attr:ng.IAttributes) {
-           let $wmtDropdown = angular.element(rawTemplate),
-               options = attr['ngOptions'];
-
-           if (!elm.closest(_parentSelector).length || !options) return;
-         
-           //Copy attributes
-           angular.forEach(elm[0].attributes, (attrObj) => {
-               let attr = attrAlias[attrObj.name] || attrObj.name;
-               $wmtDropdown.attr(attr, elm.attr(attrObj.name));
-           });
-          
-           //copy any default option
-           //if (elm.find('option').length) {
-           //    let defOption = elm.find('option')[0];
-           //    $wmtDropdown.attr('placeholder', defOption.innerHTML);
-           //}
-
-           elm.replaceWith($wmtDropdown);
-           $compile($wmtDropdown)(scope);
-       }
-   }
-}
-
 export {DropdownDirective};
